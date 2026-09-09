@@ -194,7 +194,29 @@ nav .wrap{
   .trust .item{border:none !important; padding:6px 14px;}
 }
 
-/* ---------- section shell ---------- */
+/* ---------- vip section ---------- */
+.vip{background:var(--paper);}
+.vip-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;}
+@media(max-width:820px){.vip-grid{grid-template-columns:1fr;}}
+.vip-img{border-radius:4px; overflow:hidden;}
+.vip-img img{width:100%; height:100%; object-fit:cover; display:block;}
+.vip-list{margin:22px 0 30px; padding:0;}
+.vip-list li{
+  list-style:none; position:relative; padding-inline-end:28px; margin-bottom:14px;
+  font-size:15.5px; color:#3a4a4a;
+}
+.vip-list li::before{
+  content:"✦"; position:absolute; right:0; top:1px; color:var(--emerald); font-size:14px;
+}
+
+/* ---------- testimonial video ---------- */
+.testimonial-video{
+  max-width:340px; margin:0 auto 30px; border-radius:6px; overflow:hidden;
+  border:3px solid rgba(255,255,255,0.15);
+}
+.testimonial-video video{width:100%; display:block; background:#000;}
+
+/* ---------- section head shell ---------- */
 section{padding:88px 0;}
 .section-head{margin-bottom:48px; max-width:640px;}
 .section-head h2{
@@ -397,12 +419,39 @@ footer .col a:hover{color:#fff;}
   </div>
 </section>
 
+<section id="vip" class="vip">
+  <div class="wrap vip-grid">
+    <div class="vip-img">
+      <img src="assets/vip-lounge.jpg" alt="صالة كبار الزوار VIP" loading="lazy">
+    </div>
+    <div class="vip-content">
+      <div class="section-head" style="margin-bottom:22px;">
+        <h2 class="serif">خدمة كبار الزوار VIP</h2>
+        <p>راحتكم تبدأ من قبل الإقلاع، لا من وصولكم إلى مكة.</p>
+      </div>
+      <ul class="vip-list">
+        <li>استقبال في صالات كبار الزوار (VIP Lounge) بالمطار</li>
+        <li>إنهاء إجراءات المغادرة والوصول بسرعة وخصوصية تامة</li>
+        <li>مرافقة كاملة من المطار حتى الفندق</li>
+        <li>مرافقة دينية متخصصة طوال الرحلة</li>
+      </ul>
+      <a class="btn btn-gold" href="https://wa.me/212713301880">استفسروا عن خدمة VIP</a>
+    </div>
+  </div>
+</section>
+
 <section id="testimonial" class="testimonial">
   <div class="wrap">
+    <div class="testimonial-video">
+      <video controls preload="metadata" poster="assets/quba-group.jpg">
+        <source src="assets/testimonial.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="quote-mark">”</div>
     <blockquote>تقبل الله منكم واجركم الأجر، حسن ورزق كل مشتاق زيارة بيته الكريم.</blockquote>
     <cite>— إحدى معتمرات سفريات الأحمدية</cite>
   </div>
+
 </section>
 
 <section id="contact" class="cta-final">
