@@ -248,7 +248,13 @@ section{padding:88px 0;}
 .program-panel:hover{transform:translateY(-4px); box-shadow:0 24px 48px -16px rgba(18,48,71,0.42);}
 .program-panel.green{background:linear-gradient(180deg, rgba(107,154,40,0.55) 0%, rgba(72,105,25,0.88) 55%, rgba(72,105,25,0.97) 100%), var(--poster) top center/cover;}
 .program-panel.blue{background:linear-gradient(180deg, rgba(0,144,222,0.55) 0%, rgba(10,108,166,0.88) 55%, rgba(10,108,166,0.97) 100%), var(--poster) top center/cover;}
-.panel-top-link{display:block; text-decoration:none; color:inherit; cursor:zoom-in;}
+.panel-top-link{display:block; text-decoration:none; color:inherit; cursor:pointer;}
+.panel-book-btn{
+  display:inline-block; margin-top:18px; padding:11px 26px; border-radius:24px;
+  background:var(--gold); color:#fff; font-weight:700; font-size:14.5px;
+  box-shadow:0 8px 18px -6px rgba(0,0,0,0.4); transition:background .2s ease, transform .2s ease;
+}
+.panel-top-link:hover .panel-book-btn{background:#B01F2C; transform:translateY(-2px);}
 
 .panel-top{padding:34px 34px 24px; position:relative; z-index:1;}
 .panel-badge{
@@ -420,7 +426,7 @@ footer .col a:hover{color:#fff;}
     <div class="programs-grid">
       <div class="program-panel blue" style="--poster:url('assets/poster-rabii-thani.jpg')">
         <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
-        <a class="panel-top-link" href="assets/poster-rabii-thani.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
+        <a class="panel-top-link" href="https://wa.me/212713301880" title="اضغط للحجز عبر واتساب">
         <div class="panel-top">
           <div class="panel-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 16l20-7-7 20-3-8-8-3z" stroke-linejoin="round"/></svg>
@@ -431,6 +437,7 @@ footer .col a:hover{color:#fff;}
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
             <span>30 شتنبر ← 14 أكتوبر · مكة المكرمة 10 أيام · المدينة المنورة 5 أيام</span>
           </div>
+          <span class="panel-book-btn">احجزوا الآن</span>
         </div>
         </a>
         <div class="panel-bottom">
@@ -442,7 +449,7 @@ footer .col a:hover{color:#fff;}
       </div>
       <div class="program-panel blue" style="--poster:url('assets/poster-turkey.jpg')">
         <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
-        <a class="panel-top-link" href="assets/poster-turkey.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
+        <a class="panel-top-link" href="https://wa.me/212713301880" title="اضغط للحجز عبر واتساب">
         <div class="panel-top">
           <div class="panel-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 16l20-7-7 20-3-8-8-3z" stroke-linejoin="round"/></svg>
@@ -453,6 +460,7 @@ footer .col a:hover{color:#fff;}
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
             <span>15 ← 29 أكتوبر · إسطنبول 5 أيام · مكة المكرمة 7 أيام · المدينة المنورة 5 أيام</span>
           </div>
+          <span class="panel-book-btn">احجزوا الآن</span>
         </div>
         </a>
         <div class="panel-bottom">
@@ -464,7 +472,7 @@ footer .col a:hover{color:#fff;}
       </div>
       <div class="program-panel green" style="--poster:url('assets/poster-jumada-thani.jpg')">
         <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
-        <a class="panel-top-link" href="assets/poster-jumada-thani.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
+        <a class="panel-top-link" href="https://wa.me/212713301880" title="اضغط للحجز عبر واتساب">
         <div class="panel-top">
           <div class="panel-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 16l20-7-7 20-3-8-8-3z" stroke-linejoin="round"/></svg>
@@ -475,6 +483,7 @@ footer .col a:hover{color:#fff;}
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
             <span>09 ← 23 نوفمبر · مكة المكرمة 10 أيام · المدينة المنورة 5 أيام</span>
           </div>
+          <span class="panel-book-btn">احجزوا الآن</span>
         </div>
         </a>
         <div class="panel-bottom">
@@ -486,7 +495,7 @@ footer .col a:hover{color:#fff;}
       </div>
       <div class="program-panel green" style="--poster:url('assets/poster-ramadan-2027.jpg')">
         <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
-        <a class="panel-top-link" href="assets/poster-ramadan-2027.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
+        <a class="panel-top-link" href="https://wa.me/212713301880" title="اضغط للحجز عبر واتساب">
         <div class="panel-top">
           <div class="panel-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M21 12.8c-2.9 4.6-9 6-13.5 3.1s-6-9-3.1-13.5c1-1.6 2.5-2.8 4.2-3.5-.4 1.6-.1 3.4 1 4.8 1.6 2.1 4.6 2.5 6.7.9.6-.5 1-1.1 1.3-1.7 1.6 2.6 2.5 6 3.4 9.9z"/></svg>
@@ -497,6 +506,7 @@ footer .col a:hover{color:#fff;}
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
             <span>03 فبراير ← 23 مارس · مكة: منطقة المسفلة · المدينة: المنطقة المركزية</span>
           </div>
+          <span class="panel-book-btn">احجزوا الآن</span>
         </div>
         </a>
         <div class="panel-bottom">
