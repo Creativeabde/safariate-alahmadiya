@@ -334,6 +334,29 @@ section{padding:88px 0;}
 
 /* ---------- footer ---------- */
 footer{background:var(--emerald-deep); color:rgba(255,255,255,0.72); font-size:14px;}
+
+/* ---------- program modal (in-page lightbox) ---------- */
+.program-modal{
+  display:none; position:fixed; inset:0; background:rgba(10,15,15,0.92);
+  z-index:999; align-items:center; justify-content:center; padding:70px 16px;
+}
+.program-modal.open{display:flex;}
+.program-modal-inner{max-width:480px; width:100%; max-height:100%; overflow-y:auto; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.program-modal-inner img{width:100%; display:block;}
+.modal-close-btn{
+  position:fixed; top:20px; left:20px; background:rgba(255,255,255,0.15); color:#fff;
+  border:none; width:42px; height:42px; border-radius:50%; font-size:18px; cursor:pointer; z-index:1001;
+  display:flex; align-items:center; justify-content:center;
+}
+.modal-close-btn:hover{background:rgba(255,255,255,0.28);}
+.modal-book-btn{
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
+  background:var(--gold); color:#fff; font-weight:700; font-size:16px;
+  padding:15px 38px; border-radius:30px; box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  z-index:1001; text-decoration:none; white-space:nowrap;
+}
+.modal-book-btn:hover{background:#B01F2C;}
+@media(max-width:480px){.modal-book-btn{padding:13px 28px; font-size:15px;}}
 footer .wrap{
   display:flex; justify-content:space-between; padding:38px 32px; flex-wrap:wrap; gap:20px;
   border-bottom:1px solid rgba(255,255,255,0.12);
@@ -443,7 +466,7 @@ footer .col a:hover{color:#fff;}
           <div class="program-price">
             <div><span class="from">ابتداءً من</span><div class="num">14,000 <span>درهم</span></div></div>
           </div>
-          <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
+          <a class="btn" href="#" onclick="event.preventDefault(); openProgramModal('assets/poster-rabii-thani.jpg')">استفسروا عن هذا البرنامج</a>
         </div>
       </div>
       <div class="program-panel blue" style="--poster:url('assets/poster-turkey.jpg')">
@@ -465,7 +488,7 @@ footer .col a:hover{color:#fff;}
           <div class="program-price">
             <div><span class="from">ابتداءً من</span><div class="num">16,000 <span>درهم</span></div></div>
           </div>
-          <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
+          <a class="btn" href="#" onclick="event.preventDefault(); openProgramModal('assets/poster-turkey.jpg')">استفسروا عن هذا البرنامج</a>
         </div>
       </div>
       <div class="program-panel green" style="--poster:url('assets/poster-jumada-thani.jpg')">
@@ -487,7 +510,7 @@ footer .col a:hover{color:#fff;}
           <div class="program-price">
             <div><span class="from">ابتداءً من</span><div class="num">14,000 <span>درهم</span></div></div>
           </div>
-          <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
+          <a class="btn" href="#" onclick="event.preventDefault(); openProgramModal('assets/poster-jumada-thani.jpg')">استفسروا عن هذا البرنامج</a>
         </div>
       </div>
       <div class="program-panel green" style="--poster:url('assets/poster-ramadan-2027.jpg')">
@@ -509,7 +532,7 @@ footer .col a:hover{color:#fff;}
           <div class="program-price">
             <div><span class="from">ابتداءً من</span><div class="num">26,000 <span>درهم</span></div></div>
           </div>
-          <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
+          <a class="btn" href="#" onclick="event.preventDefault(); openProgramModal('assets/poster-ramadan-2027.jpg')">استفسروا عن هذا البرنامج</a>
         </div>
       </div>
     </div>
@@ -629,6 +652,29 @@ footer .col a:hover{color:#fff;}
     <span>سجل تجاري رقم 103991 — الدار البيضاء</span>
   </div>
 </footer>
+
+<div id="programModal" class="program-modal">
+  <button class="modal-close-btn" onclick="closeProgramModal()" aria-label="إغلاق">✕</button>
+  <div class="program-modal-inner">
+    <img id="programModalImg" src="" alt="تفاصيل البرنامج">
+  </div>
+  <a class="modal-book-btn" href="https://wa.me/212713301880" target="_blank" rel="noopener">احجزوا الآن</a>
+</div>
+
+<script>
+function openProgramModal(src){
+  document.getElementById('programModalImg').src = src;
+  document.getElementById('programModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProgramModal(){
+  document.getElementById('programModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('programModal').addEventListener('click', function(e){
+  if(e.target === this){ closeProgramModal(); }
+});
+</script>
 
 </body>
 </html>
