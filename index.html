@@ -246,8 +246,8 @@ section{padding:88px 0;}
   transition:transform .25s ease, box-shadow .25s ease;
 }
 .program-panel:hover{transform:translateY(-4px); box-shadow:0 24px 48px -16px rgba(18,48,71,0.42);}
-.program-panel.green{background:linear-gradient(180deg, rgba(107,154,40,0.55) 0%, rgba(72,105,25,0.88) 55%, rgba(72,105,25,0.97) 100%), url('assets/poster-ramadan-2027.jpg') top center/cover;}
-.program-panel.blue{background:linear-gradient(180deg, rgba(0,144,222,0.55) 0%, rgba(10,108,166,0.88) 55%, rgba(10,108,166,0.97) 100%), url('assets/poster-rabii-thani.jpg') top center/cover;}
+.program-panel.green{background:linear-gradient(180deg, rgba(107,154,40,0.55) 0%, rgba(72,105,25,0.88) 55%, rgba(72,105,25,0.97) 100%), var(--poster) top center/cover;}
+.program-panel.blue{background:linear-gradient(180deg, rgba(0,144,222,0.55) 0%, rgba(10,108,166,0.88) 55%, rgba(10,108,166,0.97) 100%), var(--poster) top center/cover;}
 .panel-top-link{display:block; text-decoration:none; color:inherit; cursor:zoom-in;}
 
 .panel-top{padding:34px 34px 24px; position:relative; z-index:1;}
@@ -415,10 +415,10 @@ footer .col a:hover{color:#fff;}
   <div class="wrap">
     <div class="section-head">
       <h2 class="serif">برامجنا الحالية</h2>
-      <p>باقتان مفتوحتان للحجز الآن، بأسعار وفنادق مدروسة لكل الميزانيات.</p>
+      <p>أربعة برامج مفتوحة للحجز الآن، بأسعار وفنادق مدروسة لكل الميزانيات.</p>
     </div>
     <div class="programs-grid">
-      <div class="program-panel green">
+      <div class="program-panel green" style="--poster:url('assets/poster-ramadan-2027.jpg')">
         <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
         <a class="panel-top-link" href="assets/poster-ramadan-2027.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
         <div class="panel-top">
@@ -440,7 +440,7 @@ footer .col a:hover{color:#fff;}
           <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
         </div>
       </div>
-      <div class="program-panel blue">
+      <div class="program-panel blue" style="--poster:url('assets/poster-rabii-thani.jpg')">
         <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
         <a class="panel-top-link" href="assets/poster-rabii-thani.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
         <div class="panel-top">
@@ -452,6 +452,50 @@ footer .col a:hover{color:#fff;}
           <div class="panel-route">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
             <span>30 شتنبر ← 14 أكتوبر · مكة المكرمة 10 أيام · المدينة المنورة 5 أيام</span>
+          </div>
+        </div>
+        </a>
+        <div class="panel-bottom">
+          <div class="program-price">
+            <div><span class="from">ابتداءً من</span><div class="num">14,000 <span>درهم</span></div></div>
+          </div>
+          <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
+        </div>
+      </div>
+      <div class="program-panel blue" style="--poster:url('assets/poster-turkey.jpg')">
+        <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
+        <a class="panel-top-link" href="assets/poster-turkey.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
+        <div class="panel-top">
+          <div class="panel-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 16l20-7-7 20-3-8-8-3z" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="program-tag">عبر الخطوط التركية</div>
+          <h3 class="serif">عمرة مع تركيا</h3>
+          <div class="panel-route">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
+            <span>15 ← 29 أكتوبر · إسطنبول 5 أيام · مكة المكرمة 7 أيام · المدينة المنورة 5 أيام</span>
+          </div>
+        </div>
+        </a>
+        <div class="panel-bottom">
+          <div class="program-price">
+            <div><span class="from">ابتداءً من</span><div class="num">16,000 <span>درهم</span></div></div>
+          </div>
+          <a class="btn" href="https://wa.me/212713301880">استفسروا عن هذا البرنامج</a>
+        </div>
+      </div>
+      <div class="program-panel green" style="--poster:url('assets/poster-jumada-thani.jpg')">
+        <svg class="panel-pattern" viewBox="0 0 200 200"><path d="M100 20 L120 80 L180 80 L130 115 L150 175 L100 140 L50 175 L70 115 L20 80 L80 80 Z" fill="none" stroke="#fff" stroke-width="1"/></svg>
+        <a class="panel-top-link" href="assets/poster-jumada-thani.jpg" target="_blank" rel="noopener" title="اضغط لعرض تفاصيل البرنامج كاملة">
+        <div class="panel-top">
+          <div class="panel-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 16l20-7-7 20-3-8-8-3z" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="program-tag">خط مباشر عبر الخطوط السعودية</div>
+          <h3 class="serif">عمرة جمادى الثاني</h3>
+          <div class="panel-route">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 12h18M14 6l6 6-6 6"/></svg>
+            <span>09 ← 23 نوفمبر · مكة المكرمة 10 أيام · المدينة المنورة 5 أيام</span>
           </div>
         </div>
         </a>
