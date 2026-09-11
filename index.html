@@ -433,7 +433,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
 
 <header class="hero">
   <div class="hero-bg">
+    <picture>
+    <source media="(max-width:640px)" srcset="assets/hero-kaaba-mobile.webp" type="image/webp">
     <img src="assets/hero-kaaba.jpg" alt="ضيوف الرحمن حول الكعبة المشرفة بالمسجد الحرام" width="1500" height="843" fetchpriority="high">
+  </picture>
   </div>
   <div class="wrap">
     <div class="hero-inner">
@@ -569,7 +572,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
 <section id="why" class="why">
   <div class="wrap why-grid">
     <div class="why-photo">
-      <img src="assets/mosque-exterior.jpg" alt="ساحة المسجد الحرام بمكة المكرمة" width="900" height="675" loading="lazy">
+      <picture>
+        <source media="(max-width:640px)" srcset="assets/mosque-ext-mobile.webp" type="image/webp">
+        <img src="assets/mosque-exterior.jpg" alt="ساحة المسجد الحرام بمكة المكرمة" width="900" height="675" loading="lazy">
+      </picture>
       <div class="why-badge"><b>+11 سنة</b><span>في خدمة ضيوف الرحمن</span></div>
     </div>
     <div>
@@ -672,12 +678,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
       <p>صور حقيقية من أفواج سفريات الأحمدية في مكة المكرمة والمدينة المنورة.</p>
     </div>
     <div class="gal-grid">
-      <img src="assets/gallery-1.jpg" alt="فوج معتمرات سفريات الأحمدية أمام المسجد الحرام" loading="lazy" width="900" height="675">
-      <img src="assets/gallery-2.jpg" alt="فوج سفريات الأحمدية أمام مسجد قباء بالمدينة المنورة" loading="lazy" width="900" height="675">
-      <img src="assets/gallery-3.jpg" alt="معتمرون من سفريات الأحمدية أمام الكعبة المشرفة" loading="lazy" width="900" height="506">
-      <img src="assets/gallery-4.jpg" alt="فوج معتمرات أمام الكعبة المشرفة" loading="lazy" width="900" height="506">
-      <img src="assets/gallery-5.jpg" alt="زيارة فوج سفريات الأحمدية لجبل أُحد بالمدينة المنورة" loading="lazy" width="900" height="675">
-      <img src="assets/gallery-6.jpg" alt="معتمرو سفريات الأحمدية بلباس الإحرام" loading="lazy" width="900" height="675">
+      <picture><source media="(max-width:640px)" srcset="assets/gallery-1-m.webp" type="image/webp"><img src="assets/gallery-1.jpg" alt="فوج معتمرات سفريات الأحمدية أمام المسجد الحرام" loading="lazy" width="900" height="675"></picture>
+      <picture><source media="(max-width:640px)" srcset="assets/gallery-2-m.webp" type="image/webp"><img src="assets/gallery-2.jpg" alt="فوج سفريات الأحمدية أمام مسجد قباء بالمدينة المنورة" loading="lazy" width="900" height="675"></picture>
+      <picture><source media="(max-width:640px)" srcset="assets/gallery-3-m.webp" type="image/webp"><img src="assets/gallery-3.jpg" alt="معتمرون من سفريات الأحمدية أمام الكعبة المشرفة" loading="lazy" width="900" height="506"></picture>
+      <picture><source media="(max-width:640px)" srcset="assets/gallery-4-m.webp" type="image/webp"><img src="assets/gallery-4.jpg" alt="فوج معتمرات أمام الكعبة المشرفة" loading="lazy" width="900" height="506"></picture>
+      <picture><source media="(max-width:640px)" srcset="assets/gallery-5-m.webp" type="image/webp"><img src="assets/gallery-5.jpg" alt="زيارة فوج سفريات الأحمدية لجبل أُحد بالمدينة المنورة" loading="lazy" width="900" height="675"></picture>
+      <picture><source media="(max-width:640px)" srcset="assets/gallery-6-m.webp" type="image/webp"><img src="assets/gallery-6.jpg" alt="معتمرو سفريات الأحمدية بلباس الإحرام" loading="lazy" width="900" height="675"></picture>
     </div>
   </div>
 </section>
@@ -861,6 +867,9 @@ function sendVip(){
   closeVip();
 }
 
+// ← عدّل هذا الرابط بعد نشر Google Apps Script
+var SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+
 function sendBooking(){
   var name = document.getElementById('bkName').value.trim();
   var phone = document.getElementById('bkPhone').value.trim();
@@ -872,6 +881,14 @@ function sendBooking(){
     alert('يرجى إدخال الاسم ورقم الهاتف لإتمام الطلب.');
     (!name ? document.getElementById('bkName') : document.getElementById('bkPhone')).focus();
     return;
+  }
+
+  // حفظ في Google Sheets (في الخلفية)
+  if(SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL'){
+    var entry = {name:name, phone:phone, program:prog, room:room, note:note,
+                 time:new Date().toLocaleString('ar-MA'), source:'website'};
+    fetch(SHEET_URL, {method:'POST', body:JSON.stringify(entry)})
+      .catch(function(){/* لا نوقف التجربة إن فشل الحفظ */});
   }
 
   var msg = 'السلام عليكم، أرغب في الحجز مع سفريات الأحمدية.\n\n'
