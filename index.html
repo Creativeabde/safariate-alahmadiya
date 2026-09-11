@@ -179,6 +179,31 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .stat span{font-size:13px;color:rgba(255,255,255,.66)}
 @media(max-width:700px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
 
+/* hero logo seals */
+.hero-seals{
+  position:absolute;left:6%;top:50%;transform:translateY(-50%);z-index:2;
+  display:flex;gap:18px;align-items:center;
+}
+.seal{
+  background:rgba(255,255,255,.97);border-radius:18px;padding:18px 18px 14px;
+  box-shadow:0 22px 55px -20px rgba(0,0,0,.65);
+  display:grid;justify-items:center;gap:11px;width:152px;
+}
+.seal img{height:100px;width:auto}
+.seal span{
+  font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--muted);
+  padding-top:9px;border-top:1px solid var(--line);width:100%;text-align:center;
+}
+.seal.vip span{color:#8A6A1E}
+@media(max-width:1180px){
+  .hero-seals{
+    position:static;transform:none;margin-top:38px;justify-content:flex-start;
+  }
+  .seal{width:126px;padding:14px 14px 11px}
+  .seal img{height:76px}
+}
+@media(max-width:420px){.seal{width:112px}.seal img{height:64px}}
+
 /* ================= programs ================= */
 .programs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:860px){.programs-grid{grid-template-columns:1fr}}
@@ -396,6 +421,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
       <div class="hero-actions">
         <a class="btn btn-lime" href="#programs">تصفّحوا برامج العمرة</a>
         <a class="btn btn-ghost" href="#booking">احجزوا مكانكم</a>
+      </div>
+      <div class="hero-seals">
+        <div class="seal">
+          <img src="assets/logo.png" alt="شعار سفريات الأحمدية" width="240" height="316" loading="lazy">
+          <span>الخدمة الاعتيادية</span>
+        </div>
+        <div class="seal vip">
+          <img src="assets/logo-vip.png" alt="شعار سفريات الأحمدية VIP" width="220" height="290" loading="lazy">
+          <span>خدمة كبار الزوار VIP</span>
+        </div>
       </div>
     </div>
   </div>
