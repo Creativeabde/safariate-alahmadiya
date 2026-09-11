@@ -391,6 +391,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
 </head>
 <body>
 
+<div id="ann" class="ann-bar">
+  <span>🔔 الأماكن المحدودة في رحلة 30 شتنبر — احجزوا مكانكم الآن قبل النفاد</span>
+  <button onclick="document.getElementById('ann').style.display='none'" aria-label="إغلاق">✕</button>
+</div>
 <div class="topbar">
   <div class="wrap">
     <div class="facts">
@@ -436,6 +440,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
       <span class="eyebrow">عمرة · حج · مرافقة دينية متخصصة</span>
       <h1>رحلتكم إلى بيت الله <em>أمانة</em> نحملها معكم خطوة بخطوة</h1>
       <p>من أول اتصال حتى العودة بسلام: التأشيرة، التذكرة، الفندق القريب من الحرم، والمؤطر الديني — كل التفاصيل علينا، لتبقوا مشغولين بعبادتكم وحدها.</p>
+      <div class="hero-countdown" id="hcd">
+        <div class="hcd-label">ينطلق أول أفواجنا خلال</div>
+        <div class="hcd-dials">
+          <span id="cd-d">--</span><small>يوم</small>
+          <span id="cd-h">--</span><small>ساعة</small>
+          <span id="cd-m">--</span><small>دقيقة</small>
+          <span id="cd-s">--</span><small>ثانية</small>
+        </div>
+      </div>
       <div class="hero-actions">
         <a class="btn btn-lime" href="#programs">تصفّحوا برامج العمرة</a>
         <a class="btn btn-ghost" href="#booking">احجزوا مكانكم</a>
@@ -669,6 +682,48 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
   </div>
 </section>
 
+<section id="reviews" class="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">آراء عملائنا</span>
+      <h2>ماذا قال ضيوف رحلاتنا</h2>
+      <p>شهادات حقيقية من معتمري رحلة عمرة المولد 20/08 مع سفريات الأحمدية.</p>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"جزاكم الله خيراً والله يثبت اعمالكم يا رب 🙏"</p>
+        <cite class="rev-name">خالد ط. <span>— عميل ·212629***</span></cite>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"جزاكم الله خيراً على هذا المجهود الرائع"</p>
+        <cite class="rev-name">ل. ح. <span>— عميل ·212627***</span></cite>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"جزاكم الله كل خير على المجهودات الجبارة التي قام بها طاقم سفريات الأحمدي لراحة المعتمرين والمواكبة المستمرة لهم في جميع مراحل هذا السفر"</p>
+        <cite class="rev-name">أم سلطان <span>— عميل ·212629***</span></cite>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"جزاكم الله خيراً وشكراً على مجهوداتكم وتقبّل الله من المعتمرين والمعتمرات"</p>
+        <cite class="rev-name">و. ح. <span>— عميل ·212767***</span></cite>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"شكراً جزيلاً على مجهوداتكم وشكراً سيد الزبيري يحسن خاتم وخاتمتنا"</p>
+        <cite class="rev-name">م. ب. <span>— عميل ·212664***</span></cite>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"جزاكم الله خير على هذا المجهود الرائع شكر خاص لطاقم سفريات الاحمدي"</p>
+        <cite class="rev-name">سمير ح. <span>— عميل ·212606***</span></cite>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="testi">
   <div class="wrap">
     <video controls preload="none" poster="assets/quba-group.jpg" playsinline>
@@ -831,5 +886,83 @@ function sendBooking(){
 }
 </script>
 
+
+<div id="tyModal" class="ty-modal" aria-hidden="true">
+  <div class="ty-box">
+    <div class="ty-icon">✅</div>
+    <h3>شكراً لتواصلكم معنا!</h3>
+    <p>فتحنا لكم محادثة واتساب جاهزة — أرسلوا الرسالة وسنتواصل معكم خلال ساعات بإذن الله.</p>
+    <button class="btn btn-primary" onclick="closeTy()">حسناً، فهمت</button>
+  </div>
+</div>
+
 </body>
 </html>
+<!-- ===  extra styles + scripts appended === -->
+<style>
+/* announcement bar */
+.ann-bar{background:var(--ember);color:#fff;text-align:center;padding:11px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:14px;position:relative;z-index:90}
+.ann-bar button{background:none;border:none;color:rgba(255,255,255,.8);font-size:17px;cursor:pointer;line-height:1;flex-shrink:0}
+.ann-bar button:hover{color:#fff}
+/* countdown */
+.hero-countdown{margin-bottom:30px;display:inline-flex;flex-direction:column;gap:8px}
+.hcd-label{font-size:13.5px;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.4px}
+.hcd-dials{display:flex;gap:12px;align-items:flex-end}
+.hcd-dials span{font-size:clamp(32px,4.5vw,50px);font-weight:900;line-height:1;color:var(--lime)}
+.hcd-dials small{font-size:12px;color:rgba(255,255,255,.65);padding-bottom:8px;font-weight:600}
+/* reviews */
+.reviews{background:var(--sand-2)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.rev-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.rev-grid{grid-template-columns:1fr}}
+.rev-card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:0 10px 30px -16px rgba(10,42,61,.22);display:flex;flex-direction:column;gap:12px}
+.rev-stars{color:#F5A623;font-size:18px;letter-spacing:2px}
+.rev-text{font-size:15px;color:var(--ink-2);line-height:1.75;font-weight:300;flex:1}
+.rev-name{font-size:13.5px;font-weight:700;color:var(--muted)}
+.rev-name span{font-weight:400;font-size:12.5px}
+/* thank-you modal */
+.ty-modal{display:none;position:fixed;inset:0;background:rgba(6,18,26,.88);z-index:300;align-items:center;justify-content:center;padding:24px}
+.ty-modal.open{display:flex}
+.ty-box{background:#fff;border-radius:20px;padding:40px 32px;max-width:400px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.ty-icon{font-size:52px;margin-bottom:16px}
+.ty-box h3{font-size:22px;margin-bottom:10px}
+.ty-box p{font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.75;font-weight:300}
+.ty-box .btn{width:100%}
+</style>
+<script>
+// countdown to Sep 30 2026
+(function(){
+  var target=new Date('2026-09-30T08:00:00+01:00');
+  function tick(){
+    var now=new Date(), diff=target-now;
+    if(diff<=0){document.getElementById('hcd').style.display='none';return;}
+    var d=Math.floor(diff/86400000);
+    var h=Math.floor((diff%86400000)/3600000);
+    var m=Math.floor((diff%3600000)/60000);
+    var s=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent=d;
+    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+function closeTy(){
+  var m=document.getElementById('tyModal');
+  m.classList.remove('open');m.setAttribute('aria-hidden','true');
+}
+
+// patch sendBooking to show thank-you after opening WA
+var _origSend=sendBooking;
+sendBooking=function(){
+  var name=document.getElementById('bkName').value.trim();
+  var phone=document.getElementById('bkPhone').value.trim();
+  if(!name||!phone){_origSend();return;}
+  _origSend();
+  setTimeout(function(){
+    var m=document.getElementById('tyModal');
+    m.classList.add('open');m.setAttribute('aria-hidden','false');
+  },500);
+};
+</script>
