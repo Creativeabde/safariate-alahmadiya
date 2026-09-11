@@ -852,6 +852,16 @@ function notifyRamadan(){
   var msg = 'السلام عليكم، أرغب أن يتم إشعاري فور إعلان برنامج عمرة رمضان 2027 مع سفريات الأحمدية.\n\n'
           + 'أرجو تزويدي بالتفاصيل والأسعار حال جاهزيتها. وشكراً.';
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+
+  // Meta Pixel — تسجيل حدث Lead عند إرسال طلب الحجز
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead', {
+      content_name: prog,
+      content_category: 'Umrah Booking',
+      value: 0,
+      currency: 'MAD'
+    });
+  }
 }
 
 function openVip(){
@@ -881,6 +891,9 @@ function sendVip(){
           + (p ? '• عدد الأشخاص: ' + p + '\n' : '')
           + '\nأرجو تزويدي بعرض خاص يشمل الفنادق والخدمات والأسعار. وشكراً.';
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead', {content_name: 'VIP Request', content_category: 'VIP Umrah', currency: 'MAD'});
+  }
   closeVip();
 }
 
@@ -917,6 +930,16 @@ function sendBooking(){
           + '\nأرجو تزويدي بالتفاصيل والخطوات التالية. وشكراً.';
 
   window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+
+  // Meta Pixel — تسجيل حدث Lead عند إرسال طلب الحجز
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead', {
+      content_name: prog,
+      content_category: 'Umrah Booking',
+      value: 0,
+      currency: 'MAD'
+    });
+  }
 }
 </script>
 
