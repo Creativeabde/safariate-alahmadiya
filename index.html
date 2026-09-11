@@ -203,6 +203,20 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
   .seal img{height:76px}
 }
 @media(max-width:420px){.seal{width:112px}.seal img{height:64px}}
+.seal{transition:transform .22s,box-shadow .22s}
+.seal:hover{transform:translateY(-5px);box-shadow:0 28px 60px -18px rgba(0,0,0,.72)}
+
+/* VIP request modal */
+.vip-modal{display:none;position:fixed;inset:0;background:rgba(6,18,26,.93);z-index:210;align-items:center;justify-content:center;padding:24px}
+.vip-modal.open{display:flex}
+.vip-box{background:#fff;border-radius:20px;padding:34px 30px;max-width:430px;width:100%;box-shadow:0 34px 80px rgba(0,0,0,.6);position:relative}
+@media(max-width:480px){.vip-box{padding:28px 20px}}
+.vip-box>img{height:84px;width:auto;margin:0 auto 16px}
+.vip-box h3{font-size:21px;text-align:center;margin-bottom:8px}
+.vip-box p{font-size:14.5px;color:var(--muted);text-align:center;margin-bottom:22px;font-weight:300;line-height:1.7}
+.vip-box .btn{width:100%;margin-top:4px}
+.vip-close{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:50%;border:none;background:var(--sand-2);color:var(--ink);font-size:15px;cursor:pointer;display:grid;place-items:center}
+.vip-close:hover{background:var(--line)}
 
 /* ================= programs ================= */
 .programs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -423,14 +437,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
         <a class="btn btn-ghost" href="#booking">احجزوا مكانكم</a>
       </div>
       <div class="hero-seals">
-        <div class="seal">
+        <a class="seal" href="#programs">
           <img src="assets/logo.png" alt="شعار سفريات الأحمدية" width="240" height="316" loading="lazy">
-          <span>الخدمة الاعتيادية</span>
-        </div>
-        <div class="seal vip">
+          <span>برامج الأفواج المنظّمة</span>
+        </a>
+        <a class="seal vip" href="#" onclick="event.preventDefault(); openVip()">
           <img src="assets/logo-vip.png" alt="شعار سفريات الأحمدية VIP" width="220" height="290" loading="lazy">
           <span>خدمة كبار الزوار VIP</span>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -698,6 +712,24 @@ footer{background:var(--ink);color:rgba(255,255,255,.68);font-size:14.5px;paddin
   <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-3-.2-.3A8 8 0 1112 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.6 6.6 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4L9.8 7c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 00-.7.3A2.9 2.9 0 007.2 9c0 1.7 1.2 3.3 1.4 3.5.2.2 2.4 3.7 5.8 5 .8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5-.1-.1-.2-.2-.4-.3z"/></svg>
 </a>
 
+<div id="vipModal" class="vip-modal" aria-hidden="true">
+  <div class="vip-box">
+    <button class="vip-close" onclick="closeVip()" aria-label="إغلاق">✕</button>
+    <img src="assets/logo-vip.png" alt="شعار سفريات الأحمدية VIP" width="220" height="290">
+    <h3>خدمة كبار الزوار VIP</h3>
+    <p>لا يوجد حالياً برنامج VIP معلن بتاريخ محدد — نجهّزه لكم حسب طلبكم. أخبرونا بالتاريخ المناسب وسنعود إليكم بعرض خاص.</p>
+    <div class="field">
+      <label for="vipDate">التاريخ أو الفترة المطلوبة</label>
+      <input id="vipDate" type="text" placeholder="مثال: أواخر دجنبر 2026 · أو: رمضان · أو: مرن">
+    </div>
+    <div class="field">
+      <label for="vipPax">عدد الأشخاص (اختياري)</label>
+      <input id="vipPax" type="text" placeholder="مثال: شخصان" inputmode="text">
+    </div>
+    <button class="btn btn-primary" onclick="sendVip()">متابعة عبر واتساب</button>
+  </div>
+</div>
+
 <div id="modal" class="modal" aria-hidden="true">
   <button class="modal-x" onclick="closeModal()" aria-label="إغلاق">✕</button>
   <div class="modal-img"><img id="modalImg" src="" alt="تفاصيل البرنامج كاملة"></div>
@@ -722,8 +754,38 @@ document.getElementById('modal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape') closeModal();
+  if(e.key === 'Escape'){ closeModal(); closeVip(); }
 });
+
+function openVip(){
+  var m = document.getElementById('vipModal');
+  m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('vipDate').focus(); }, 80);
+}
+function closeVip(){
+  var m = document.getElementById('vipModal');
+  m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+document.getElementById('vipModal').addEventListener('click', function(e){
+  if(e.target === this) closeVip();
+});
+function sendVip(){
+  var d = document.getElementById('vipDate').value.trim();
+  var p = document.getElementById('vipPax').value.trim();
+  if(!d){
+    alert('يرجى تحديد التاريخ أو الفترة المطلوبة.');
+    document.getElementById('vipDate').focus();
+    return;
+  }
+  var msg = 'السلام عليكم، أرغب في برنامج عمرة VIP (خدمة كبار الزوار) مع سفريات الأحمدية.\n\n'
+          + '• التاريخ / الفترة المطلوبة: ' + d + '\n'
+          + (p ? '• عدد الأشخاص: ' + p + '\n' : '')
+          + '\nأرجو تزويدي بعرض خاص يشمل الفنادق والخدمات والأسعار. وشكراً.';
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+  closeVip();
+}
 
 function sendBooking(){
   var name = document.getElementById('bkName').value.trim();
