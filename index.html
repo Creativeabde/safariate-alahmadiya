@@ -154,6 +154,20 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 @media(max-width:900px){.navlinks{display:none}}
 @media(max-width:420px){.nav-cta{padding:11px 18px;font-size:13.5px}.brand img{height:46px}}
 
+/* ================= license badges ================= */
+.nav-badges{display:flex;align-items:center;gap:10px}
+.nav-badge{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:64px;height:64px;border-radius:50%;
+  background:#fff;border:2px solid var(--sea,#0a6a5c);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  text-align:center;line-height:1.1;flex-shrink:0;
+}
+.nav-badge svg{width:20px;height:20px;fill:var(--sea,#0a6a5c);margin-bottom:2px}
+.nav-badge span{font-size:8.5px;font-weight:800;color:var(--ink,#1a1a1a)}
+@media(max-width:900px){.nav-badges{gap:6px}.nav-badge{width:50px;height:50px}.nav-badge svg{width:16px;height:16px}.nav-badge span{font-size:7px}}
+@media(max-width:640px){.nav-badges{display:none}}
+
 /* ================= hero ================= */
 .hero{position:relative;color:#fff;overflow:hidden;isolation:isolate}
 .hero-bg{position:absolute;inset:0;z-index:-2}
@@ -439,6 +453,20 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     <a class="brand" href="#" aria-label="سفريات الأحمدية">
       <img src="assets/logo.png" alt="شعار سفريات الأحمدية" width="240" height="316">
     </a>
+    <div class="nav-badges">
+      <div class="nav-badge" title="شهادة تنظيم الحج">
+        <svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>تنظيم<br>الحج</span>
+      </div>
+      <div class="nav-badge" title="رخصة وكالة أسفار - وزارة السياحة">
+        <svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm-1 14.4L6.6 11l1.4-1.4 3 3 6-6L18.4 8l-7.4 7.4z"/></svg>
+        <span>رخصة<br>السياحة</span>
+      </div>
+      <div class="nav-badge" title="عضوية الغرفة المغربية للأسفار - IATA">
+        <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2.5 1.5V22l4-1 4 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        <span>عضوية<br>IATA</span>
+      </div>
+    </div>
     <div class="navlinks">
       <a href="#programs">البرامج</a>
       <a href="#why">لماذا نحن</a>
@@ -1028,3 +1056,4 @@ sendBooking=function(){
   },500);
 };
 </script>
+
