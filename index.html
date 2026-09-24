@@ -234,9 +234,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .seal:hover{transform:translateY(-5px);box-shadow:0 28px 60px -18px rgba(0,0,0,.72)}
 
 /* VIP request modal */
-.vip-modal{display:none;position:fixed;inset:0;background:rgba(6,18,26,.93);z-index:210;align-items:center;justify-content:center;padding:24px}
+.vip-modal{display:none;position:fixed;inset:0;background:rgba(6,18,26,.93);z-index:210;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
 .vip-modal.open{display:flex}
-.vip-box{background:#fff;border-radius:20px;padding:34px 30px;max-width:430px;width:100%;box-shadow:0 34px 80px rgba(0,0,0,.6);position:relative}
+.vip-box{background:#fff;border-radius:20px;padding:34px 30px;max-width:430px;width:100%;box-shadow:0 34px 80px rgba(0,0,0,.6);position:relative;max-height:calc(100vh - 48px);max-height:calc(100dvh - 48px);overflow-y:auto;-webkit-overflow-scrolling:touch}
 @media(max-width:480px){.vip-box{padding:28px 20px}}
 .vip-box>img{height:84px;width:auto;margin:0 auto 16px}
 .vip-box h3{font-size:21px;text-align:center;margin-bottom:8px}
