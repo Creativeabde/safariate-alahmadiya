@@ -139,6 +139,7 @@ h1,h2,h3{line-height:1.3;font-weight:900;letter-spacing:-0.3px}
 .btn-lime:hover{background:var(--lime-deep);color:#fff}
 .btn-ghost{background:transparent;color:#fff;border:1.6px solid rgba(255,255,255,.5)}
 .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff}
+@media(max-width:480px){.btn{padding:12px 20px;font-size:13.5px;gap:7px}}
 
 /* ================= top bar ================= */
 .topbar{background:var(--ink);color:rgba(255,255,255,.72);font-size:13px}
@@ -197,6 +198,12 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .hero p{margin-top:20px;font-size:17.5px;color:rgba(255,255,255,.82);max-width:50ch;font-weight:300}
 .hero-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
 @media(max-width:640px){.hero-inner{padding:70px 0 60px}}
+@media(max-width:480px){
+  .hero-inner{padding:46px 0 34px}
+  .hero h1{font-size:clamp(25px,7.5vw,33px);line-height:1.32}
+  .hero p{margin-top:12px;font-size:14.5px}
+  .hero-actions{gap:9px;margin-top:22px}
+}
 
 /* stats strip */
 .stats{background:var(--ink-2);color:#fff}
@@ -1478,6 +1485,14 @@ function sendBooking(){
 .hcd-dials small{font-size:13px;color:rgba(255,255,255,.85);padding-bottom:9px;font-weight:700;letter-spacing:.2px}
 .hcd-link{display:inline-block;margin-right:6px;color:#fff;background:var(--ember);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;text-decoration:none;vertical-align:middle;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(214,69,69,.4)}
 .hcd-link:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(214,69,69,.55)}
+@media(max-width:480px){
+  .hero-countdown{margin-bottom:18px;gap:7px}
+  .hcd-label{font-size:13px;line-height:1.5}
+  .hcd-dials{gap:9px}
+  .hcd-dials span{font-size:clamp(24px,9vw,33px)}
+  .hcd-dials small{font-size:10.5px;padding-bottom:5px}
+  .hcd-link{font-size:11.5px;padding:3px 9px}
+}
 /* reviews */
 .reviews{background:var(--sand-2)}
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
