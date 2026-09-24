@@ -258,10 +258,13 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .offer-flag{font-size:40px;line-height:1;margin-bottom:6px}
 .offer-box h3{font-size:22px;margin-bottom:8px}
 .offer-box>p{font-size:14.5px;color:var(--muted);margin-bottom:18px;font-weight:400;line-height:1.7}
-.offer-price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:20px}
-.offer-price .old{font-size:15px;color:var(--muted);text-decoration:line-through;opacity:.75}
-.offer-price .new{font-size:30px;font-weight:900;color:var(--ember)}
-.offer-price .new small{font-size:14px;font-weight:700}
+.offer-price-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;background:var(--sand-2,#FBF6EC);border-radius:12px;padding:12px 16px}
+.offer-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.offer-price-row+.offer-price-row{border-top:1px dashed var(--line);padding-top:8px}
+.offer-price-row .room{font-size:13.5px;font-weight:700;color:var(--ink);white-space:nowrap}
+.offer-price-row .old{font-size:13px;color:var(--muted);text-decoration:line-through;opacity:.75;margin-left:8px}
+.offer-price-row .new{font-size:21px;font-weight:900;color:var(--ember)}
+.offer-price-row .new small{font-size:12.5px;font-weight:700}
 .offer-dismiss{display:block;width:100%;background:none;border:none;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;padding:4px;text-decoration:underline}
 .offer-dismiss:hover{color:var(--ink)}
 
@@ -1115,9 +1118,22 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     <div class="offer-flag">🇹🇷</div>
     <h3>خصم 500 درهم على عمرة مع تركيا</h3>
     <p>احجزوا مكانكم في رحلة <b>عمرة مع تركيا</b> قبل <b>30 شتنبر</b> واستفيدوا من خصم فوري على السعر.</p>
-    <div class="offer-price">
-      <span class="old">16.000 درهم</span>
-      <span class="new">15.500 <small>درهم</small></span>
+    <div class="offer-price-list">
+      <div class="offer-price-row">
+        <span class="room">رباعية</span>
+        <span class="old">16.000</span>
+        <span class="new">15.500 <small>درهم</small></span>
+      </div>
+      <div class="offer-price-row">
+        <span class="room">ثلاثية</span>
+        <span class="old">17.000</span>
+        <span class="new">16.500 <small>درهم</small></span>
+      </div>
+      <div class="offer-price-row">
+        <span class="room">ثنائية</span>
+        <span class="old">18.000</span>
+        <span class="new">17.500 <small>درهم</small></span>
+      </div>
     </div>
     <button class="btn btn-primary" onclick="closeOffer(); openTurkeyModal();">🔥 احجزوا الآن واستفيدوا من الخصم</button>
     <button type="button" class="offer-dismiss" onclick="closeOffer()">لا، شكراً</button>
