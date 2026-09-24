@@ -350,6 +350,20 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
   border-radius:9px;padding:8px 10px;font-size:11.5px;font-weight:600;line-height:1.6;
 }
 .card .btn.btn-waitlist{background:#8B1A1A;}
+/* Open-for-registration halo (Turkey trip) */
+.card.is-open-now{
+  animation:turkeyGlow 2.4s ease-in-out infinite;
+}
+@keyframes turkeyGlow{
+  0%,100%{box-shadow:0 2px 14px rgba(0,0,0,.09),0 1px 3px rgba(0,0,0,.06),0 0 0 0 rgba(255,193,7,.45);}
+  50%{box-shadow:0 10px 34px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08),0 0 26px 7px rgba(255,193,7,.55);}
+}
+.card .open-banner{
+  position:absolute;top:0;right:0;left:0;z-index:3;
+  background:linear-gradient(90deg,#FFD54F,#FFB300);
+  color:#3D1F00;font-size:11px;font-weight:800;text-align:center;
+  line-height:1.5;padding:6px 12px;letter-spacing:.15px;
+}
 /* Card themes */
 .c-rabii  {--accent:#0E6BA8;--chip-bg:#DFF0FB;}
 .c-turkey {--accent:#B83030;--chip-bg:#FDEAEA;}
@@ -663,8 +677,9 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     </div>
   </article>
 
-  <article class="card c-turkey" onclick="openTurkeyModal()">
+  <article class="card c-turkey is-open-now" onclick="openTurkeyModal()">
     <div class="illus">
+      <span class="open-banner">🔥 الرحلة القادمة — التسجيل ما زال مفتوحاً، بادروا قبل امتلاء المقاعد!</span>
       <svg viewBox="0 0 400 172" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a0a0a"/><stop offset="60%" stop-color="#8B1A1A"/><stop offset="100%" stop-color="#C44"/></linearGradient>
