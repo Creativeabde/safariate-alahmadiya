@@ -539,7 +539,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
       <h1>رحلتكم إلى بيت الله <em>أمانة</em> نحملها معكم خطوة بخطوة</h1>
       <p>من أول اتصال حتى العودة بسلام: التأشيرة، التذكرة، الفندق القريب من الحرم، والمؤطر الديني — كل التفاصيل علينا، لتبقوا مشغولين بعبادتكم وحدها.</p>
       <div class="hero-countdown" id="hcd">
-        <div class="hcd-label">⏳ تنطلق رحلة عمرة مع تركيا 🇹🇷 خلال</div>
+        <div class="hcd-label">⏳ تنطلق رحلة عمرة مع تركيا 🇹🇷 خلال <a href="#" class="hcd-link" onclick="event.preventDefault(); openTurkeyModal()">شاهد التفاصيل</a></div>
         <div class="hcd-dials">
           <span id="cd-d">--</span><small>📅 يوم</small>
           <span id="cd-h">--</span><small>⏰ ساعة</small>
@@ -1292,6 +1292,8 @@ function sendBooking(){
 .hcd-dials{display:flex;gap:14px;align-items:flex-end}
 .hcd-dials span{font-size:clamp(36px,5vw,56px);font-weight:900;line-height:1;color:#FFD54F;text-shadow:0 2px 18px rgba(255,213,74,.4)}
 .hcd-dials small{font-size:13px;color:rgba(255,255,255,.85);padding-bottom:9px;font-weight:700;letter-spacing:.2px}
+.hcd-link{display:inline-block;margin-right:6px;color:#fff;background:var(--ember);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;text-decoration:none;vertical-align:middle;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(214,69,69,.4)}
+.hcd-link:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(214,69,69,.55)}
 /* reviews */
 .reviews{background:var(--sand-2)}
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
