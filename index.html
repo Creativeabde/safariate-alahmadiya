@@ -337,6 +337,19 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
   cursor:pointer;transition:opacity .15s;white-space:nowrap;
 }
 .card .btn:hover{opacity:.88;}
+/* Sold-out / waitlist state */
+.card .soldout-ribbon{
+  position:absolute;top:12px;left:-32px;z-index:3;
+  background:#8B1A1A;color:#fff;font-size:11px;font-weight:800;
+  padding:5px 40px;transform:rotate(-38deg);
+  box-shadow:0 3px 10px rgba(0,0,0,.35);letter-spacing:.2px;
+}
+.card.is-full .illus{filter:grayscale(.35) brightness(.82);}
+.card .full-note{
+  background:#FDEAEA;color:#8B1A1A;border:1px solid rgba(139,26,26,.18);
+  border-radius:9px;padding:8px 10px;font-size:11.5px;font-weight:600;line-height:1.6;
+}
+.card .btn.btn-waitlist{background:#8B1A1A;}
 /* Card themes */
 .c-rabii  {--accent:#0E6BA8;--chip-bg:#DFF0FB;}
 .c-turkey {--accent:#B83030;--chip-bg:#FDEAEA;}
@@ -605,7 +618,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     </div>
     <div class="programs-grid">
 
-      <article class="card c-rabii" onclick="openModal('assets/poster-rabii-thani.jpg')">
+      <article class="card c-rabii is-full" onclick="openWaitlistModal()">
     <div class="illus">
       <svg viewBox="0 0 400 172" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <defs>
@@ -629,6 +642,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
         <rect x="174" y="105" width="52" height="6" fill="#B8960C" opacity="0.7"/>
         <rect width="400" height="172" fill="url(#ov1)"/>
       </svg>
+      <span class="soldout-ribbon">اكتملت المقاعد</span>
       <div class="illus-text">
         <span class="badge">&#x2708; خط مباشر &middot; السعودية</span>
         <div class="photo-title">عمرة ربيع الثاني</div>
@@ -640,10 +654,11 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
         <span class="date-chip">30 شتنبر</span><span class="sep">&#x2190;</span><span class="date-chip">14 أكتوبر</span>
       </div>
       <div class="sub">مكة المكرمة 10 أيام &middot; المدينة المنورة 5 أيام</div>
+      <div class="full-note">⏳ اكتمل عدد المقاعد لهذا البرنامج — سجّلوا في لائحة الانتظار وسنعلمكم فور توفر مكان.</div>
       <div class="card-divider"></div>
       <div class="foot">
         <div class="price"><small>ابتداءً من</small><div class="amount">14.000 <span class="currency">درهم</span></div></div>
-        <button class="btn">التفاصيل</button>
+        <button class="btn btn-waitlist">لائحة الانتظار</button>
       </div>
     </div>
   </article>
@@ -1135,6 +1150,30 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
   </div>
 </div>
 
+<div id="waitlistModal" class="vip-modal waitlist-modal" aria-hidden="true">
+  <div class="vip-box">
+    <button class="vip-close" onclick="closeWaitlistModal()" aria-label="إغلاق">✕</button>
+    <h3>لائحة الانتظار: عمرة ربيع الثاني 🇸🇦</h3>
+    <span class="offer-badge turkey-offer-badge" style="background:#8B1A1A">⏳ اكتملت المقاعد — 30 شتنبر إلى 14 أكتوبر</span>
+    <div class="turkey-summary">
+      <div class="turkey-summary-row"><span>🗓️ التاريخ</span><b>30 شتنبر إلى 14 أكتوبر 2026 (15 يوم)</b></div>
+      <div class="turkey-summary-row"><span>📍 البرنامج</span><b>مكة المكرمة 10 أيام · المدينة المنورة 5 أيام</b></div>
+      <div class="turkey-summary-row"><span>💰 السعر</span><b>ابتداءً من 14.000 درهم</b></div>
+    </div>
+    <p class="form-note" style="margin-top:-4px">✅ سجّلوا بياناتكم وسيتم التواصل معكم فوراً في حال توفر مكان أو إضافة مقاعد جديدة لهذا البرنامج.</p>
+    <div class="field">
+      <label for="wlName">الاسم الكامل</label>
+      <input id="wlName" type="text" placeholder="مثال: يوسف الإدريسي أو سلمى بنعلي" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="wlPhone">رقم الهاتف</label>
+      <input id="wlPhone" type="tel" placeholder="مثال: 0612345678" autocomplete="tel" inputmode="tel">
+    </div>
+    <button class="btn btn-primary" onclick="sendWaitlistReg()">التسجيل في لائحة الانتظار</button>
+    <p class="form-note">✅ بعد التسجيل سيتواصل معكم فريقنا في أقرب وقت — وستُفتح لكم أيضاً محادثة واتساب لتسريع التواصل.</p>
+  </div>
+</div>
+
 <div id="offerModal" class="vip-modal offer-modal" aria-hidden="true">
   <div class="vip-box offer-box">
     <button class="vip-close" onclick="closeOffer()" aria-label="إغلاق">✕</button>
@@ -1169,7 +1208,7 @@ document.getElementById('modal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); closeOffer(); }
+  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); closeOffer(); closeWaitlistModal(); }
 });
 
 // نافذة العرض الخاص: خصم 500 درهم على عمرة مع تركيا قبل 30 شتنبر
@@ -1291,6 +1330,56 @@ function sendTurkeyReg(){
     fbq('track', 'Lead', {content_name: prog, content_category: 'Umrah Booking', value: 0, currency: 'MAD'});
   }
   closeTurkeyModal();
+  setTimeout(function(){
+    var m=document.getElementById('tyModal');
+    m.classList.add('open');m.setAttribute('aria-hidden','false');
+  },400);
+}
+
+function openWaitlistModal(){
+  var m = document.getElementById('waitlistModal');
+  m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('wlName').focus(); }, 80);
+}
+function closeWaitlistModal(){
+  var m = document.getElementById('waitlistModal');
+  m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+document.getElementById('waitlistModal').addEventListener('click', function(e){
+  if(e.target === this) closeWaitlistModal();
+});
+function sendWaitlistReg(){
+  var name = document.getElementById('wlName').value.trim();
+  var phone = document.getElementById('wlPhone').value.trim();
+  var prog = 'عمرة ربيع الثاني — 30 شتنبر إلى 14 أكتوبر 2026 (لائحة الانتظار)';
+
+  if(!name || !phone){
+    alert('يرجى إدخال الاسم ورقم الهاتف لإتمام التسجيل في لائحة الانتظار.');
+    (!name ? document.getElementById('wlName') : document.getElementById('wlPhone')).focus();
+    return;
+  }
+
+  if(SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL'){
+    var entry = {name:name, phone:phone, program:prog, room:'', note:'',
+                 time:new Date().toLocaleString('ar-MA'), source:'website-waitlist'};
+    fetch(SHEET_URL, {method:'POST', body:JSON.stringify(entry)})
+      .catch(function(){/* لا نوقف التجربة إن فشل الحفظ */});
+  }
+
+  var msg = 'السلام عليكم، أرغب في التسجيل في لائحة انتظار رحلة عمرة ربيع الثاني مع سفريات الأحمدية.\n\n'
+          + '• الاسم: ' + name + '\n'
+          + '• الهاتف: ' + phone + '\n'
+          + '• البرنامج: ' + prog + '\n'
+          + '\nأرجو إشعاري فور توفر مكان. وشكراً.';
+
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead', {content_name: prog, content_category: 'Umrah Waitlist', value: 0, currency: 'MAD'});
+  }
+  closeWaitlistModal();
   setTimeout(function(){
     var m=document.getElementById('tyModal');
     m.classList.add('open');m.setAttribute('aria-hidden','false');
