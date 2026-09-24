@@ -258,6 +258,11 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .offer-flag{font-size:40px;line-height:1;margin-bottom:6px}
 .offer-box h3{font-size:22px;margin-bottom:8px}
 .offer-box>p{font-size:14.5px;color:var(--muted);margin-bottom:18px;font-weight:400;line-height:1.7}
+.offer-discount-badge{display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 0 16px}
+.offer-discount-badge .tag{font-size:32px}
+.offer-discount-badge .amount{font-size:38px;font-weight:900;color:#fff;background:linear-gradient(135deg,#E24949,#8B1A1A);padding:10px 24px;border-radius:16px;box-shadow:0 12px 28px rgba(214,69,69,.45);letter-spacing:.5px}
+.offer-discount-badge .amount small{font-size:15px;font-weight:700}
+.turkey-offer-badge{margin:2px 0 12px}
 .offer-price-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;background:var(--sand-2,#FBF6EC);border-radius:12px;padding:12px 16px}
 .offer-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .offer-price-row+.offer-price-row{border-top:1px dashed var(--line);padding-top:8px}
@@ -1092,11 +1097,29 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
   <div class="vip-box">
     <button class="vip-close" onclick="closeTurkeyModal()" aria-label="إغلاق">✕</button>
     <h3>التسجيل: عمرة مع تركيا 🇹🇷</h3>
+    <span class="offer-badge turkey-offer-badge">🔥 خصم 500 درهم قبل 30 شتنبر</span>
+    <div class="offer-price-list">
+      <div class="offer-price-row">
+        <span class="room">رباعية</span>
+        <span class="old">16.000</span>
+        <span class="new">15.500 <small>درهم</small></span>
+      </div>
+      <div class="offer-price-row">
+        <span class="room">ثلاثية</span>
+        <span class="old">17.000</span>
+        <span class="new">16.500 <small>درهم</small></span>
+      </div>
+      <div class="offer-price-row">
+        <span class="room">ثنائية</span>
+        <span class="old">18.000</span>
+        <span class="new">17.500 <small>درهم</small></span>
+      </div>
+    </div>
+    <p class="offer-note">* لكل فرد</p>
     <div class="turkey-summary">
       <div class="turkey-summary-row"><span>🗓️ التاريخ</span><b>15 إلى 29 أكتوبر 2026 (14 يوم)</b></div>
       <div class="turkey-summary-row"><span>📍 البرنامج</span><b>إسطنبول 4 أيام · مكة المكرمة 6 أيام · المدينة المنورة 4 أيام</b></div>
       <div class="turkey-summary-row"><span>✈️ الطيران</span><b>الخطوط التركية</b></div>
-      <div class="turkey-summary-row"><span>💰 السعر</span><b>ابتداءً من 16.000 درهم</b></div>
     </div>
     <button type="button" class="turkey-poster-link" onclick="openModal('assets/poster-turkey.jpg')">عرض ملصق البرنامج الكامل</button>
     <div class="field">
@@ -1117,26 +1140,12 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     <button class="vip-close" onclick="closeOffer()" aria-label="إغلاق">✕</button>
     <span class="offer-badge">🔥 عرض لفترة محدودة</span>
     <div class="offer-flag">🇹🇷</div>
-    <h3>خصم 500 درهم على عمرة مع تركيا</h3>
-    <p>احجزوا مكانكم في رحلة <b>عمرة مع تركيا</b> قبل <b>30 شتنبر</b> واستفيدوا من خصم فوري على السعر.</p>
-    <div class="offer-price-list">
-      <div class="offer-price-row">
-        <span class="room">رباعية</span>
-        <span class="old">16.000</span>
-        <span class="new">15.500 <small>درهم</small></span>
-      </div>
-      <div class="offer-price-row">
-        <span class="room">ثلاثية</span>
-        <span class="old">17.000</span>
-        <span class="new">16.500 <small>درهم</small></span>
-      </div>
-      <div class="offer-price-row">
-        <span class="room">ثنائية</span>
-        <span class="old">18.000</span>
-        <span class="new">17.500 <small>درهم</small></span>
-      </div>
+    <h3>خصم على رحلة عمرة مع تركيا</h3>
+    <div class="offer-discount-badge">
+      <span class="tag">🏷️</span>
+      <span class="amount">-500 <small>درهم</small></span>
     </div>
-    <p class="offer-note">* لكل فرد</p>
+    <p>احجزوا مكانكم في رحلة <b>عمرة مع تركيا</b> قبل <b>30 شتنبر</b> واستفيدوا من الخصم فوراً على السعر.</p>
     <button class="btn btn-primary" onclick="closeOffer(); openTurkeyModal();">🔥 احجزوا الآن واستفيدوا من الخصم</button>
     <button type="button" class="offer-dismiss" onclick="closeOffer()">لا، شكراً</button>
   </div>
