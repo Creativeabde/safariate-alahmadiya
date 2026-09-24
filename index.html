@@ -1232,7 +1232,7 @@ document.getElementById('offerModal').addEventListener('click', function(e){
     m.classList.add('open'); m.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
     try{ sessionStorage.setItem('offerSeen', '1'); }catch(e){}
-  }, 3500);
+  }, 100);
 })();
 
 function notifyRamadan(){
