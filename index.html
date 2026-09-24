@@ -242,6 +242,13 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .vip-box .btn{width:100%;margin-top:4px}
 .vip-close{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:50%;border:none;background:var(--sand-2);color:var(--ink);font-size:15px;cursor:pointer;display:grid;place-items:center}
 .vip-close:hover{background:var(--line)}
+.turkey-modal .vip-box{max-width:420px}
+.turkey-summary{background:var(--sand-2,#FBF6EC);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;flex-direction:column;gap:7px}
+.turkey-summary-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:13px}
+.turkey-summary-row span{color:var(--muted);font-weight:500;white-space:nowrap}
+.turkey-summary-row b{color:var(--ink);font-weight:700;text-align:left}
+.turkey-poster-link{display:block;width:100%;background:none;border:none;color:#B83030;font-size:12.5px;font-weight:700;text-decoration:underline;cursor:pointer;margin:0 0 16px;padding:0;text-align:center}
+.turkey-poster-link:hover{opacity:.75}
 
 /* ================= programs ================= */
 .programs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -621,7 +628,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     </div>
   </article>
 
-  <article class="card c-turkey" onclick="openModal('assets/poster-turkey.jpg')">
+  <article class="card c-turkey" onclick="openTurkeyModal()">
     <div class="illus">
       <svg viewBox="0 0 400 172" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <defs>
@@ -1061,6 +1068,30 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
   <a class="btn btn-primary modal-cta" href="https://wa.me/212713301880" target="_blank" rel="noopener">احجزوا الآن عبر واتساب</a>
 </div>
 
+<div id="turkeyModal" class="vip-modal turkey-modal" aria-hidden="true">
+  <div class="vip-box">
+    <button class="vip-close" onclick="closeTurkeyModal()" aria-label="إغلاق">✕</button>
+    <h3>التسجيل: عمرة مع تركيا 🇹🇷</h3>
+    <div class="turkey-summary">
+      <div class="turkey-summary-row"><span>🗓️ التاريخ</span><b>15 إلى 29 أكتوبر 2026 (14 يوم)</b></div>
+      <div class="turkey-summary-row"><span>📍 البرنامج</span><b>إسطنبول 4 أيام · مكة المكرمة 6 أيام · المدينة المنورة 4 أيام</b></div>
+      <div class="turkey-summary-row"><span>✈️ الطيران</span><b>الخطوط التركية</b></div>
+      <div class="turkey-summary-row"><span>💰 السعر</span><b>ابتداءً من 16.000 درهم</b></div>
+    </div>
+    <button type="button" class="turkey-poster-link" onclick="openModal('assets/poster-turkey.jpg')">عرض ملصق البرنامج الكامل</button>
+    <div class="field">
+      <label for="trkName">الاسم الكامل</label>
+      <input id="trkName" type="text" placeholder="مثال: عبدالرحمان فاضل" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="trkPhone">رقم الهاتف</label>
+      <input id="trkPhone" type="tel" placeholder="مثال: 0612345678" autocomplete="tel" inputmode="tel">
+    </div>
+    <button class="btn btn-primary" onclick="sendTurkeyReg()">إرسال طلب التسجيل عبر واتساب</button>
+    <p class="form-note">لن يُرسل الطلب تلقائياً — ستفتح لكم محادثة واتساب بالرسالة جاهزة للمراجعة قبل الإرسال.</p>
+  </div>
+</div>
+
 <script>
 var WA = '212713301880';
 
@@ -1079,7 +1110,7 @@ document.getElementById('modal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ closeModal(); closeVip(); }
+  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); }
 });
 
 function notifyRamadan(){
@@ -1129,6 +1160,54 @@ function sendVip(){
     fbq('track', 'Lead', {content_name: 'VIP Request', content_category: 'VIP Umrah', currency: 'MAD'});
   }
   closeVip();
+}
+
+function openTurkeyModal(){
+  var m = document.getElementById('turkeyModal');
+  m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('trkName').focus(); }, 80);
+}
+function closeTurkeyModal(){
+  var m = document.getElementById('turkeyModal');
+  m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+document.getElementById('turkeyModal').addEventListener('click', function(e){
+  if(e.target === this) closeTurkeyModal();
+});
+function sendTurkeyReg(){
+  var name = document.getElementById('trkName').value.trim();
+  var phone = document.getElementById('trkPhone').value.trim();
+  var prog = 'عمرة مع تركيا — 15 إلى 29 أكتوبر 2026';
+
+  if(!name || !phone){
+    alert('يرجى إدخال الاسم ورقم الهاتف لإتمام التسجيل.');
+    (!name ? document.getElementById('trkName') : document.getElementById('trkPhone')).focus();
+    return;
+  }
+
+  if(SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL'){
+    var entry = {name:name, phone:phone, program:prog, room:'', note:'',
+                 time:new Date().toLocaleString('ar-MA'), source:'website-turkey'};
+    fetch(SHEET_URL, {method:'POST', body:JSON.stringify(entry)})
+      .catch(function(){/* لا نوقف التجربة إن فشل الحفظ */});
+  }
+
+  var msg = 'السلام عليكم، أرغب في التسجيل في رحلة عمرة مع تركيا مع سفريات الأحمدية.\n\n'
+          + '• الاسم: ' + name + '\n'
+          + '• الهاتف: ' + phone + '\n'
+          + '• البرنامج: ' + prog + '\n'
+          + '• إسطنبول 4 أيام · مكة المكرمة 6 أيام · المدينة المنورة 4 أيام\n'
+          + '• السعر: ابتداءً من 16.000 درهم\n'
+          + '\nأرجو تزويدي بالتفاصيل والخطوات التالية. وشكراً.';
+
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead', {content_name: prog, content_category: 'Umrah Booking', value: 0, currency: 'MAD'});
+  }
+  closeTurkeyModal();
 }
 
 // ← عدّل هذا الرابط بعد نشر Google Apps Script
