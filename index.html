@@ -1210,6 +1210,14 @@ function sendTurkeyReg(){
   closeTurkeyModal();
 }
 
+// فتح نافذة التسجيل تلقائياً عند الوصول عبر الرابط الخاص
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  if(params.get('open') === 'turkey' || window.location.hash === '#تسجيل-تركيا'){
+    setTimeout(openTurkeyModal, 300);
+  }
+})();
+
 // ← عدّل هذا الرابط بعد نشر Google Apps Script
 var SHEET_URL = 'https://script.google.com/macros/s/AKfycbx9adShr9QEzf0z5BhT-pKDzNOchrmbk_kSLB-4x93l4YGi7UCG-meVBKmW5QCIqsA35w/exec';
 
