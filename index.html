@@ -1087,8 +1087,8 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
       <label for="trkPhone">رقم الهاتف</label>
       <input id="trkPhone" type="tel" placeholder="مثال: 0612345678" autocomplete="tel" inputmode="tel">
     </div>
-    <button class="btn btn-primary" onclick="sendTurkeyReg()">إرسال طلب التسجيل عبر واتساب</button>
-    <p class="form-note">لن يُرسل الطلب تلقائياً — ستفتح لكم محادثة واتساب بالرسالة جاهزة للمراجعة قبل الإرسال.</p>
+    <button class="btn btn-primary" onclick="sendTurkeyReg()">إرسال طلب التسجيل</button>
+    <p class="form-note">✅ بمجرد الضغط على الزر يصلنا طلبكم فوراً وسيتواصل معكم فريقنا في أقرب وقت — وستُفتح لكم أيضاً محادثة واتساب لتسريع التواصل.</p>
   </div>
 </div>
 
@@ -1208,6 +1208,10 @@ function sendTurkeyReg(){
     fbq('track', 'Lead', {content_name: prog, content_category: 'Umrah Booking', value: 0, currency: 'MAD'});
   }
   closeTurkeyModal();
+  setTimeout(function(){
+    var m=document.getElementById('tyModal');
+    m.classList.add('open');m.setAttribute('aria-hidden','false');
+  },400);
 }
 
 // فتح نافذة التسجيل تلقائياً عند الوصول عبر الرابط الخاص
@@ -1268,8 +1272,8 @@ function sendBooking(){
 <div id="tyModal" class="ty-modal" aria-hidden="true">
   <div class="ty-box">
     <div class="ty-icon">✅</div>
-    <h3>شكراً لتواصلكم معنا!</h3>
-    <p>فتحنا لكم محادثة واتساب جاهزة — أرسلوا الرسالة وسنتواصل معكم خلال ساعات بإذن الله.</p>
+    <h3>تم استلام طلبكم بنجاح!</h3>
+    <p>وصلنا طلبكم وسيتواصل معكم فريقنا في أقرب وقت بإذن الله. فتحنا لكم أيضاً محادثة واتساب لتسريع التواصل — يمكنكم إرسال الرسالة إن أردتم.</p>
     <button class="btn btn-primary" onclick="closeTy()">حسناً، فهمت</button>
   </div>
 </div>
