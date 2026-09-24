@@ -252,6 +252,19 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .turkey-poster-link{display:block;width:100%;background:none;border:none;color:#B83030;font-size:12.5px;font-weight:700;text-decoration:underline;cursor:pointer;margin:0 0 16px;padding:0;text-align:center}
 .turkey-poster-link:hover{opacity:.75}
 
+/* نافذة العرض الخاص */
+.offer-box{text-align:center;overflow:hidden}
+.offer-badge{display:inline-block;background:var(--ember);color:#fff;font-size:12px;font-weight:800;letter-spacing:.3px;padding:6px 14px;border-radius:20px;margin-bottom:10px}
+.offer-flag{font-size:40px;line-height:1;margin-bottom:6px}
+.offer-box h3{font-size:22px;margin-bottom:8px}
+.offer-box>p{font-size:14.5px;color:var(--muted);margin-bottom:18px;font-weight:400;line-height:1.7}
+.offer-price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:20px}
+.offer-price .old{font-size:15px;color:var(--muted);text-decoration:line-through;opacity:.75}
+.offer-price .new{font-size:30px;font-weight:900;color:var(--ember)}
+.offer-price .new small{font-size:14px;font-weight:700}
+.offer-dismiss{display:block;width:100%;background:none;border:none;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;padding:4px;text-decoration:underline}
+.offer-dismiss:hover{color:var(--ink)}
+
 /* ================= programs ================= */
 .programs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:860px){.programs-grid{grid-template-columns:1fr}}
@@ -1095,6 +1108,22 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
   </div>
 </div>
 
+<div id="offerModal" class="vip-modal offer-modal" aria-hidden="true">
+  <div class="vip-box offer-box">
+    <button class="vip-close" onclick="closeOffer()" aria-label="إغلاق">✕</button>
+    <span class="offer-badge">🔥 عرض لفترة محدودة</span>
+    <div class="offer-flag">🇹🇷</div>
+    <h3>خصم 500 درهم على عمرة مع تركيا</h3>
+    <p>احجزوا مكانكم في رحلة <b>عمرة مع تركيا</b> قبل <b>30 شتنبر</b> واستفيدوا من خصم فوري على السعر.</p>
+    <div class="offer-price">
+      <span class="old">16.000 درهم</span>
+      <span class="new">15.500 <small>درهم</small></span>
+    </div>
+    <button class="btn btn-primary" onclick="closeOffer(); openTurkeyModal();">🔥 احجزوا الآن واستفيدوا من الخصم</button>
+    <button type="button" class="offer-dismiss" onclick="closeOffer()">لا، شكراً</button>
+  </div>
+</div>
+
 <script>
 var WA = '212713301880';
 
@@ -1113,8 +1142,32 @@ document.getElementById('modal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); }
+  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); closeOffer(); }
 });
+
+// نافذة العرض الخاص: خصم 500 درهم على عمرة مع تركيا قبل 30 شتنبر
+function closeOffer(){
+  var m = document.getElementById('offerModal');
+  m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  try{ sessionStorage.setItem('offerSeen', '1'); }catch(e){}
+}
+document.getElementById('offerModal').addEventListener('click', function(e){
+  if(e.target === this) closeOffer();
+});
+(function(){
+  var deadline = new Date('2026-09-30T23:59:59+01:00');
+  if(new Date() > deadline) return;
+  var alreadySeen = false;
+  try{ alreadySeen = sessionStorage.getItem('offerSeen') === '1'; }catch(e){}
+  if(alreadySeen) return;
+  setTimeout(function(){
+    var m = document.getElementById('offerModal');
+    m.classList.add('open'); m.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    try{ sessionStorage.setItem('offerSeen', '1'); }catch(e){}
+  }, 3500);
+})();
 
 function notifyRamadan(){
   var msg = 'السلام عليكم، أرغب أن يتم إشعاري فور إعلان برنامج عمرة رمضان 2027 مع سفريات الأحمدية.\n\n'
