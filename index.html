@@ -1610,6 +1610,22 @@ function openBookingForm(programKey){
     setTimeout(function(){ openBookingForm(params.get('program')); }, 300);
   }
 })();
+// رابط مباشر لفتح نافذة تسجيل عمرة رمضان (مع حاسبة السعر) عبر ?open=ramadan
+// يمكن أيضاً تحديد نوع الرحلة تلقائياً عبر ?open=ramadan&flight=direct
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var cameFromRamadanLink = (params.get('open') === 'ramadan' || window.location.hash === '#تسجيل-رمضان');
+  if(cameFromRamadanLink){
+    setTimeout(function(){
+      var flight = params.get('flight');
+      if(flight === 'direct' || flight === 'indirect'){
+        var flightSel = document.getElementById('rmdFlight');
+        if(flightSel) flightSel.value = flight;
+      }
+      openRamadanModal();
+    }, 300);
+  }
+})();
 
 // ← عدّل هذا الرابط بعد نشر Google Apps Script
 var SHEET_URL = 'https://script.google.com/macros/s/AKfycbx9adShr9QEzf0z5BhT-pKDzNOchrmbk_kSLB-4x93l4YGi7UCG-meVBKmW5QCIqsA35w/exec';
