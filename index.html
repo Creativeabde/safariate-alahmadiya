@@ -819,7 +819,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     </div>
   </article>
 
-  <article class="card c-ramadan" onclick="openModal('assets/poster-ramadan.jpg')">
+  <article class="card c-ramadan" onclick="openRamadanModal()">
     <div class="illus">
       <svg viewBox="0 0 400 172" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
         <defs>
@@ -1197,6 +1197,61 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
   </div>
 </div>
 
+<div id="ramadanModal" class="vip-modal ramadan-modal" aria-hidden="true">
+  <div class="vip-box">
+    <button class="vip-close" onclick="closeRamadanModal()" aria-label="إغلاق">✕</button>
+    <h3>التسجيل: عمرة رمضان 2026 🌙</h3>
+    <span class="offer-badge turkey-offer-badge">✨ ابتداءً من 23.000 درهم</span>
+    <div class="turkey-summary">
+      <div class="turkey-summary-row"><span>🗓️ التاريخ</span><b>13 فبراير إلى 26 مارس 2026</b></div>
+      <div class="turkey-summary-row"><span>🏨 الفنادق</span><b>منازل الحور 2 (2000م) · جادة الخليل (1300م)</b></div>
+      <div class="turkey-summary-row"><span>✈️ الطيران</span><b>خطوط مباشرة وغير مباشرة متاحتان</b></div>
+    </div>
+    <button type="button" class="turkey-poster-link" onclick="openModal('assets/poster-ramadan.jpg')">عرض ملصق البرنامج الكامل</button>
+
+    <div class="field">
+      <label for="rmdHotel">الفندق / البرنامج</label>
+      <select id="rmdHotel" onchange="updateRamadanPrice()">
+        <option value="hour2">البرنامج الأول — منازل الحور 2 (2000م من الحرم)</option>
+        <option value="khalil">البرنامج الثاني — جادة الخليل (1300م من الحرم)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="rmdRoom">نوع الغرفة</label>
+      <select id="rmdRoom" onchange="updateRamadanPrice()">
+        <option value="5">خماسية</option>
+        <option value="4">رباعية</option>
+        <option value="3">ثلاثية</option>
+        <option value="2">ثنائية</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="rmdFlight">نوع الطيران</label>
+      <select id="rmdFlight" onchange="updateRamadanPrice()">
+        <option value="indirect">خطوط غير مباشرة (ضمن السعر المعلن)</option>
+        <option value="direct">خطوط مباشرة (+1.000 درهم)</option>
+      </select>
+    </div>
+    <div class="offer-price-list" style="margin-bottom:16px">
+      <div class="offer-price-row">
+        <span class="room">السعر الإجمالي للفرد</span>
+        <span class="new" id="rmdPriceAmount">23.000 <small>درهم</small></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="rmdName">الاسم الكامل</label>
+      <input id="rmdName" type="text" placeholder="مثال: يوسف الإدريسي أو سلمى بنعلي" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="rmdPhone">رقم الهاتف</label>
+      <input id="rmdPhone" type="tel" placeholder="مثال: 0612345678" autocomplete="tel" inputmode="tel">
+    </div>
+    <button class="btn btn-primary" onclick="sendRamadanReg()">إرسال طلب التسجيل</button>
+    <p class="form-note">✅ بعد التسجيل سيتواصل معكم فريقنا في أقرب وقت — وستُفتح لكم أيضاً محادثة واتساب لتسريع التواصل.</p>
+  </div>
+</div>
+
 <div id="offerModal" class="vip-modal offer-modal" aria-hidden="true">
   <div class="vip-box offer-box">
     <button class="vip-close" onclick="closeOffer()" aria-label="إغلاق">✕</button>
@@ -1231,7 +1286,7 @@ document.getElementById('modal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); closeOffer(); closeWaitlistModal(); }
+  if(e.key === 'Escape'){ closeModal(); closeVip(); closeTurkeyModal(); closeOffer(); closeWaitlistModal(); closeRamadanModal(); }
 });
 
 // نافذة العرض الخاص: خصم 500 درهم على عمرة مع تركيا قبل 30 شتنبر
@@ -1403,6 +1458,81 @@ function sendWaitlistReg(){
     fbq('track', 'Lead', {content_name: prog, content_category: 'Umrah Waitlist', value: 0, currency: 'MAD'});
   }
   closeWaitlistModal();
+  setTimeout(function(){
+    var m=document.getElementById('tyModal');
+    m.classList.add('open');m.setAttribute('aria-hidden','false');
+  },400);
+}
+
+var RAMADAN_PRICES = {
+  hour2:  {2:29000, 3:26000, 4:24000, 5:23000},
+  khalil: {2:32500, 3:28000, 4:25500, 5:24000}
+};
+function updateRamadanPrice(){
+  var hotel  = document.getElementById('rmdHotel').value;
+  var room   = document.getElementById('rmdRoom').value;
+  var flight = document.getElementById('rmdFlight').value;
+  var price = RAMADAN_PRICES[hotel][room];
+  if(flight === 'direct') price += 1000;
+  document.getElementById('rmdPriceAmount').innerHTML = price.toLocaleString('en-US') + ' <small>درهم</small>';
+}
+function openRamadanModal(){
+  var m = document.getElementById('ramadanModal');
+  m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  updateRamadanPrice();
+  setTimeout(function(){ document.getElementById('rmdName').focus(); }, 80);
+}
+function closeRamadanModal(){
+  var m = document.getElementById('ramadanModal');
+  m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+document.getElementById('ramadanModal').addEventListener('click', function(e){
+  if(e.target === this) closeRamadanModal();
+});
+function sendRamadanReg(){
+  var name = document.getElementById('rmdName').value.trim();
+  var phone = document.getElementById('rmdPhone').value.trim();
+  var hotelSel = document.getElementById('rmdHotel');
+  var roomSel = document.getElementById('rmdRoom');
+  var flightSel = document.getElementById('rmdFlight');
+  var hotelLabel = hotelSel.options[hotelSel.selectedIndex].text;
+  var roomLabel = roomSel.options[roomSel.selectedIndex].text;
+  var flightLabel = flightSel.options[flightSel.selectedIndex].text;
+  var price = document.getElementById('rmdPriceAmount').textContent.trim();
+  var prog = 'عمرة رمضان 2026 — 13 فبراير إلى 26 مارس 2026';
+
+  if(!name || !phone){
+    alert('يرجى إدخال الاسم ورقم الهاتف لإتمام التسجيل.');
+    (!name ? document.getElementById('rmdName') : document.getElementById('rmdPhone')).focus();
+    return;
+  }
+
+  if(SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL'){
+    var entry = {name:name, phone:phone, program:prog, room:roomLabel + ' — ' + hotelLabel + ' — ' + flightLabel,
+                 note:'السعر التقديري: ' + price,
+                 time:new Date().toLocaleString('ar-MA'), source:'website-ramadan'};
+    fetch(SHEET_URL, {method:'POST', body:JSON.stringify(entry)})
+      .catch(function(){/* لا نوقف التجربة إن فشل الحفظ */});
+  }
+
+  var msg = 'السلام عليكم، أرغب في التسجيل في رحلة عمرة رمضان 2026 مع سفريات الأحمدية.\n\n'
+          + '• الاسم: ' + name + '\n'
+          + '• الهاتف: ' + phone + '\n'
+          + '• البرنامج: ' + prog + '\n'
+          + '• الفندق: ' + hotelLabel + '\n'
+          + '• نوع الغرفة: ' + roomLabel + '\n'
+          + '• نوع الطيران: ' + flightLabel + '\n'
+          + '• السعر التقديري: ' + price + ' للفرد\n'
+          + '\nأرجو تزويدي بالتفاصيل والخطوات التالية. وشكراً.';
+
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Lead', {content_name: prog, content_category: 'Umrah Booking', value: 0, currency: 'MAD'});
+  }
+  closeRamadanModal();
   setTimeout(function(){
     var m=document.getElementById('tyModal');
     m.classList.add('open');m.setAttribute('aria-hidden','false');
