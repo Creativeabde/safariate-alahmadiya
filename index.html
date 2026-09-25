@@ -971,8 +971,8 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
       <div class="field">
         <label for="bkProgram">البرنامج المطلوب</label>
         <select id="bkProgram">
-          <option>عمرة ربيع الثاني — 30 شتنبر إلى 14 أكتوبر</option>
-          <option>عمرة مع تركيا — 15 إلى 29 أكتوبر</option>
+          <option disabled>عمرة ربيع الثاني — 30 شتنبر إلى 14 أكتوبر (اكتملت المقاعد)</option>
+          <option selected>عمرة مع تركيا — 15 إلى 29 أكتوبر</option>
           <option>عمرة جمادى الثاني — 09 إلى 23 نوفمبر</option>
           <option>عمرة رجب — 15 إلى 29 ديسمبر</option>
           <option>عمرة رمضان 2026 — خطوط غير مباشرة — ابتداءً من 23,000 درهم</option>
@@ -1609,6 +1609,10 @@ var BOOKING_PROGRAM_MAP = {
   'ramadan-direct': 5
 };
 function openBookingForm(programKey){
+  if(programKey === 'rabii' || programKey === 'ربيع'){
+    openWaitlistModal();
+    return;
+  }
   var section = document.getElementById('booking');
   if(!section) return;
   section.scrollIntoView({behavior:'smooth', block:'start'});
