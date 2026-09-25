@@ -1404,7 +1404,10 @@ function openTurkeyModal(){
   var m = document.getElementById('turkeyModal');
   m.classList.add('open'); m.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
-  setTimeout(function(){ document.getElementById('trkName').focus(); }, 80);
+  // ابدأ النافذة من الأعلى دائماً (لا تتبع تركيز حقل الاسم إلى الأسفل)
+  var box = m.querySelector('.vip-box');
+  if(box) box.scrollTop = 0;
+  setTimeout(function(){ if(box) box.scrollTop = 0; }, 60);
 }
 function closeTurkeyModal(){
   var m = document.getElementById('turkeyModal');
@@ -1456,7 +1459,10 @@ function openWaitlistModal(){
   var m = document.getElementById('waitlistModal');
   m.classList.add('open'); m.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
-  setTimeout(function(){ document.getElementById('wlName').focus(); }, 80);
+  // ابدأ النافذة من الأعلى دائماً (لا تتبع تركيز حقل الاسم إلى الأسفل)
+  var box = m.querySelector('.vip-box');
+  if(box) box.scrollTop = 0;
+  setTimeout(function(){ if(box) box.scrollTop = 0; }, 60);
 }
 function closeWaitlistModal(){
   var m = document.getElementById('waitlistModal');
@@ -1528,7 +1534,10 @@ function openRamadanModal(){
   m.classList.add('open'); m.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
   updateRamadanPrice();
-  setTimeout(function(){ document.getElementById('rmdName').focus(); }, 80);
+  // ابدأ النافذة من الأعلى دائماً (لا تتبع تركيز حقل الاسم إلى الأسفل)
+  var box = m.querySelector('.vip-box');
+  if(box) box.scrollTop = 0;
+  setTimeout(function(){ if(box) box.scrollTop = 0; }, 60);
 }
 function closeRamadanModal(){
   var m = document.getElementById('ramadanModal');
