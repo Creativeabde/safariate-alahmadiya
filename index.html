@@ -406,7 +406,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:8
 .why-item p{font-size:14.5px;color:var(--muted);line-height:1.7;font-weight:300}
 
 /* ================= booking form ================= */
-.booking{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.booking{background:var(--ink);color:#fff;position:relative;overflow:hidden;scroll-margin-top:76px}
+.booking.is-highlight .form-card{animation:bkPulse 1.6s ease-out 2}
+@keyframes bkPulse{0%{box-shadow:0 0 0 0 rgba(168,206,58,.55)}70%{box-shadow:0 0 0 18px rgba(168,206,58,0)}100%{box-shadow:0 0 0 0 rgba(168,206,58,0)}}
 .booking .zellij{position:absolute;inset:0;opacity:.055;pointer-events:none}
 .booking .wrap{position:relative;z-index:1}
 .booking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
@@ -1544,6 +1546,37 @@ function sendRamadanReg(){
   var params = new URLSearchParams(window.location.search);
   if(params.get('open') === 'turkey' || window.location.hash === '#تسجيل-تركيا'){
     setTimeout(openTurkeyModal, 300);
+  }
+})();
+
+// فتح نموذج الحجز العام (أسفل الصفحة) والتمرير إليه عبر رابط خاص
+var BOOKING_PROGRAM_MAP = {
+  'rabii':   0, 'ربيع': 0,
+  'turkey':  1, 'تركيا': 1,
+  'jumada':  2, 'جمادى': 2,
+  'rajab':   3, 'رجب': 3,
+  'ramadan': 4, 'ramadan-indirect': 4, 'رمضان': 4,
+  'ramadan-direct': 5
+};
+function openBookingForm(programKey){
+  var section = document.getElementById('booking');
+  if(!section) return;
+  section.scrollIntoView({behavior:'smooth', block:'start'});
+  if(programKey && BOOKING_PROGRAM_MAP.hasOwnProperty(programKey)){
+    var sel = document.getElementById('bkProgram');
+    if(sel) sel.selectedIndex = BOOKING_PROGRAM_MAP[programKey];
+  }
+  section.classList.add('is-highlight');
+  setTimeout(function(){ section.classList.remove('is-highlight'); }, 3300);
+  setTimeout(function(){
+    var nameField = document.getElementById('bkName');
+    if(nameField) nameField.focus({preventScroll:true});
+  }, 550);
+}
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  if(params.get('open') === 'booking' || window.location.hash === '#حجز'){
+    setTimeout(function(){ openBookingForm(params.get('program')); }, 300);
   }
 })();
 
