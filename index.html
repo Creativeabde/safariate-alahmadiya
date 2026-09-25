@@ -1265,7 +1265,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
       <span class="amount">-500 <small>درهم</small></span>
     </div>
     <p>احجزوا مكانكم في رحلة <b>عمرة مع تركيا</b> قبل <b>30 شتنبر</b> واستفيدوا من الخصم فوراً على السعر.</p>
-    <button class="btn btn-primary" onclick="closeOffer(); openTurkeyModal();">🔥 احجزوا الآن واستفيدوا من الخصم</button>
+    <button class="btn btn-primary" onclick="turkeyGateActive=false; closeOffer(); openTurkeyModal();">🔥 احجزوا الآن واستفيدوا من الخصم</button>
     <button type="button" class="offer-dismiss" onclick="closeOffer()">لا، شكراً</button>
   </div>
 </div>
@@ -1292,27 +1292,54 @@ document.addEventListener('keydown', function(e){
 });
 
 // نافذة العرض الخاص: خصم 500 درهم على عمرة مع تركيا قبل 30 شتنبر
+// عندما تُفتح هذه النافذة كـ"بوابة" قبل نافذة تسجيل تركيا (عبر رابط ?open=turkey)،
+// لا تُفتح نافذة التسجيل إلا إذا وافق الزائر على العرض؛ وإذا أغلق نافذة الخصم
+// (بالزر ✕ أو "لا، شكراً") يُعاد توجيهه إلى الصفحة الرئيسية بدل ترك نافذة التسجيل مفتوحة خلفها.
+var turkeyGateActive = false;
+
 function closeOffer(){
   var m = document.getElementById('offerModal');
   m.classList.remove('open'); m.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
   try{ sessionStorage.setItem('offerSeen', '1'); }catch(e){}
+  if(turkeyGateActive){
+    turkeyGateActive = false;
+    window.location.href = window.location.origin + window.location.pathname;
+  }
 }
 document.getElementById('offerModal').addEventListener('click', function(e){
   if(e.target === this) closeOffer();
 });
+function showOfferModal(){
+  var m = document.getElementById('offerModal');
+  m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  try{ sessionStorage.setItem('offerSeen', '1'); }catch(e){}
+}
 (function(){
   var deadline = new Date('2026-09-30T23:59:59+01:00');
-  if(new Date() > deadline) return;
+  var offerExpired = new Date() > deadline;
   var alreadySeen = false;
   try{ alreadySeen = sessionStorage.getItem('offerSeen') === '1'; }catch(e){}
-  if(alreadySeen) return;
-  setTimeout(function(){
-    var m = document.getElementById('offerModal');
-    m.classList.add('open'); m.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-    try{ sessionStorage.setItem('offerSeen', '1'); }catch(e){}
-  }, 100);
+
+  var params = new URLSearchParams(window.location.search);
+  var cameFromTurkeyLink = (params.get('open') === 'turkey' || window.location.hash === '#تسجيل-تركيا');
+
+  if(cameFromTurkeyLink){
+    if(!offerExpired && !alreadySeen){
+      // اعرض نافذة الخصم أولاً فقط؛ نافذة التسجيل تُفتح فقط عند الموافقة على العرض
+      turkeyGateActive = true;
+      setTimeout(showOfferModal, 300);
+    }else{
+      // العرض منتهي أو سبق للزائر رؤيته في هذه الجلسة: افتح نافذة التسجيل مباشرة كالمعتاد
+      setTimeout(openTurkeyModal, 300);
+    }
+    return;
+  }
+
+  if(!offerExpired && !alreadySeen){
+    setTimeout(showOfferModal, 100);
+  }
 })();
 
 function notifyRamadan(){
@@ -1541,13 +1568,8 @@ function sendRamadanReg(){
   },400);
 }
 
-// فتح نافذة التسجيل تلقائياً عند الوصول عبر الرابط الخاص
-(function(){
-  var params = new URLSearchParams(window.location.search);
-  if(params.get('open') === 'turkey' || window.location.hash === '#تسجيل-تركيا'){
-    setTimeout(openTurkeyModal, 300);
-  }
-})();
+// ملاحظة: فتح نافذة تسجيل تركيا تلقائياً عبر الرابط الخاص (?open=turkey) أصبح
+// مُدارًا ضمن كتلة "نافذة العرض الخاص" أعلاه، لتنسيقه مع نافذة الخصم ومنع تراكب النافذتين.
 
 // فتح نموذج الحجز العام (أسفل الصفحة) والتمرير إليه عبر رابط خاص
 var BOOKING_PROGRAM_MAP = {
