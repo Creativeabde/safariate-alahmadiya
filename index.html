@@ -869,7 +869,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     <div class="accent-line"></div>
     <div class="info">
       <div class="dates-row">
-        <span class="date-chip">13 فبراير</span><span class="sep">&#x2190;</span><span class="date-chip">26 مارس</span>
+        <span class="date-chip">03 فبراير</span><span class="sep">&#x2190;</span><span class="date-chip">28 مارس</span>
       </div>
       <div class="sub">خطوط مباشرة وغير مباشرة متاحتان</div>
       <div class="card-divider"></div>
@@ -1214,7 +1214,7 @@ src="https://www.facebook.com/tr?id=1644993557054854&ev=PageView&noscript=1"
     <h3>التسجيل: عمرة رمضان 2026 🌙</h3>
     <span class="offer-badge turkey-offer-badge">✨ ابتداءً من 23.000 درهم</span>
     <div class="turkey-summary">
-      <div class="turkey-summary-row"><span>🗓️ التاريخ</span><b>13 فبراير إلى 26 مارس 2026</b></div>
+      <div class="turkey-summary-row"><span>🗓️ التاريخ</span><b id="rmdDateRange">03 فبراير إلى 28 مارس 2026</b></div>
       <div class="turkey-summary-row"><span>🏨 الفنادق</span><b>منازل الحور 2 (2000م) · جادة الخليل (1300م)</b></div>
       <div class="turkey-summary-row"><span>✈️ الطيران</span><b>خطوط مباشرة وغير مباشرة متاحتان</b></div>
     </div>
@@ -1506,6 +1506,13 @@ var RAMADAN_PRICES = {
   hour2:  {2:29000, 3:26000, 4:24000, 5:23000},
   khalil: {2:32500, 3:28000, 4:25500, 5:24000}
 };
+// تواريخ الرحلة تختلف حسب نوع الطيران (حسب ملصق البرنامج الرسمي):
+// الرحلة الأولى (الخطوط المباشرة): 13 فبراير إلى 26 مارس 2026
+// الرحلة الثانية (خطوط غير مباشرة): 03 فبراير إلى 28 مارس 2026
+var RAMADAN_DATES = {
+  indirect: '03 فبراير إلى 28 مارس 2026',
+  direct:   '13 فبراير إلى 26 مارس 2026'
+};
 function updateRamadanPrice(){
   var hotel  = document.getElementById('rmdHotel').value;
   var room   = document.getElementById('rmdRoom').value;
@@ -1513,6 +1520,8 @@ function updateRamadanPrice(){
   var price = RAMADAN_PRICES[hotel][room];
   if(flight === 'direct') price += 1000;
   document.getElementById('rmdPriceAmount').innerHTML = price.toLocaleString('en-US') + ' <small>درهم</small>';
+  var dateEl = document.getElementById('rmdDateRange');
+  if(dateEl) dateEl.textContent = RAMADAN_DATES[flight] || RAMADAN_DATES.indirect;
 }
 function openRamadanModal(){
   var m = document.getElementById('ramadanModal');
@@ -1539,7 +1548,8 @@ function sendRamadanReg(){
   var roomLabel = roomSel.options[roomSel.selectedIndex].text;
   var flightLabel = flightSel.options[flightSel.selectedIndex].text;
   var price = document.getElementById('rmdPriceAmount').textContent.trim();
-  var prog = 'عمرة رمضان 2026 — 13 فبراير إلى 26 مارس 2026';
+  var dateRange = RAMADAN_DATES[flightSel.value] || RAMADAN_DATES.indirect;
+  var prog = 'عمرة رمضان 2026 — ' + dateRange;
 
   if(!name || !phone){
     alert('يرجى إدخال الاسم ورقم الهاتف لإتمام التسجيل.');
