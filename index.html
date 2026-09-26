@@ -1335,8 +1335,7 @@ function showOfferModal(){
   var cameFromTurkeyLink = (params.get('open') === 'turkey' || window.location.hash === '#تسجيل-تركيا');
 
   if(cameFromTurkeyLink){
-var hasDirectLink = params.get('open') || window.location.hash; if(!offerExpired && !alreadySeen && !hasDirectLink){
-      // اعرض نافذة الخصم أولاً فقط؛ نافذة التسجيل تُفتح فقط عند الموافقة على العرض
+ if(!offerExpired && !alreadySeen)      // اعرض نافذة الخصم أولاً فقط؛ نافذة التسجيل تُفتح فقط عند الموافقة على العرض
       turkeyGateActive = true;
       setTimeout(showOfferModal, 300);
     }else{
@@ -1346,7 +1345,7 @@ var hasDirectLink = params.get('open') || window.location.hash; if(!offerExpired
     return;
   }
 
-  if(!offerExpired && !alreadySeen){
+var hasDirectLink = params.get('open') || window.location.hash; if(!offerExpired && !alreadySeen && !hasDirectLink){
     setTimeout(showOfferModal, 100);
   }
 })();
