@@ -1667,7 +1667,7 @@ function sendBooking(){
 
   // حفظ في Google Sheets (في الخلفية)
   if(SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL'){
-    var entry = {name:name, phone:phone, program:prog, room:room, note:note,
+    var entry = {name:name, phone:phone, program:prog, room:room, note:'',
                  time:new Date().toLocaleString('ar-MA'), source:'website'};
     fetch(SHEET_URL, {method:'POST', body:JSON.stringify(entry)})
       .catch(function(){/* لا نوقف التجربة إن فشل الحفظ */});
