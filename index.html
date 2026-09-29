@@ -1888,5 +1888,21 @@ sendBooking=function(){
     m.classList.add('open');m.setAttribute('aria-hidden','false');
   },500);
 };
-</script>
 
+// فتح النموذج تلقائياً عبر URL hash
+(function(){
+  var hashMap = {
+    'register-turkey':   openTurkeyModal,
+    'register-rajab':    openRajabModal,
+    'register-ramadan':  openRamadanModal,
+    'register-jumada':   function(){ document.getElementById('jumadaModal') && openJumadaModal ? openJumadaModal() : null; },
+    'waitlist':          openWaitlistModal
+  };
+  function handleHash(){
+    var h = window.location.hash.replace('#','');
+    if(hashMap[h]) setTimeout(hashMap[h], 400);
+  }
+  window.addEventListener('DOMContentLoaded', handleHash);
+  window.addEventListener('hashchange', handleHash);
+})();
+</script>
